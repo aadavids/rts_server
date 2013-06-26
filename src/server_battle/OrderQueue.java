@@ -21,7 +21,10 @@ public class OrderQueue {
 
 		@Override
 		public boolean equals(Object other) {
-			if(other instanceof OEWrapper || other instanceof Order) {
+			if(other instanceof OEWrapper) {
+				return this.order.equals(((OEWrapper)other).order);
+			}
+			if(other instanceof Order) {
 				return this.order.equals(other);
 			}
 			return false;
@@ -38,13 +41,18 @@ public class OrderQueue {
 		inner.put(new OEWrapper(order, System.currentTimeMillis() + executionWait));
 	}
 
-	public Order take() {
-		for (;;) {
-			OEWrapper order = inner.peek();
-			if(order != null && order.executionTime <= System.currentTimeMillis()) {
-				return inner.poll().order;
-			}
-		}
+	public boolean ready() {
+		OEWrapper order = inner.peek();
+		return order != null && order.executionTime <= System.currentTimeMillis();
 	}
+
+	public Order poll() {
+		OEWrapper order = inner.poll();
+		if(order == null) {
+			return null;
+		}
+		return order.order;
+	}
+	
 }
 
