@@ -1,4 +1,4 @@
-package com.rts.server.depreciated;
+package com.rts.server.deprecated;
 
 public class Position {
 	private Integer x;

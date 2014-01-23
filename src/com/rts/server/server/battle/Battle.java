@@ -3,14 +3,14 @@ package com.rts.server.server.battle;
 import java.awt.Point;
 import java.io.*;
 
-import com.rts.server.administrative.Loggeer;
+import com.rts.server.administrative.Logger;
 import com.rts.server.units.*;
 
 
 public class Battle {
 
 	private static final int EXECUTION_POOL_SIZE = 4;
-	public static Loggeer Log = new Loggeer();
+	public static Logger Log = new Logger();
 	
 	public static void main(String args[]) throws Exception {
 		//List<String> fileNames = Arrays.asList("MainOut","UnitStatus","OrderStatus","Engine");

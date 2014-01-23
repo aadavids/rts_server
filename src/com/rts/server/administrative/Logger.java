@@ -11,17 +11,16 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
-import org.apache.log4j.Logger;
-
-public class Loggeer {
-	private List<outputChannel> channelList;
+public class Logger {
+	private List<OutputChannel> channelList;
 	private SimpleDateFormat dateformat = new SimpleDateFormat(
 			"yyyy-MM-dd hh:mm:ss ");
-	private static final Logger log = Logger.getLogger(Loggeer.class);
+	private static final org.apache.log4j.Logger log = org.apache.log4j.Logger
+			.getLogger(Logger.class);
 
 	// constructor
-	public Loggeer() {
-		channelList = new ArrayList<outputChannel>();
+	public Logger() {
+		channelList = new ArrayList<OutputChannel>();
 	}
 
 	public boolean initialize(List<String> fileNames, List<String> comPorts) {
@@ -61,7 +60,7 @@ public class Loggeer {
 					outputFile.close();
 					return false;
 				}
-				channelList.add(new outputChannel(fileNames.get(i), outputFile,
+				channelList.add(new OutputChannel(fileNames.get(i), outputFile,
 						serialchannel));
 			}
 			return true;

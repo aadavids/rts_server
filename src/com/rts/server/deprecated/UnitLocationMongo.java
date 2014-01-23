@@ -1,4 +1,4 @@
-package com.rts.server.depreciated;
+package com.rts.server.deprecated;
 
 import java.awt.Point;
 import java.net.UnknownHostException;
