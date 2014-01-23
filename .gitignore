@@ -6,7 +6,6 @@ bin/
 .metadata*
 eclimd.log
 .settings
-.project
 *.jar
 target
 bin
