@@ -7,3 +7,4 @@ bin/
 eclimd.log
 .settings
 .project
+/target
