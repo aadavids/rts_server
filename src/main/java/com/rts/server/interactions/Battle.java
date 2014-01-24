@@ -32,9 +32,9 @@ public class Battle {
 		GameUnits gameDatabase = new GameUnits();
 		OrderTimeMatrix orders = new OrderTimeMatrix(EXECUTION_POOL_SIZE,
 				gameMap, gameDatabase);
-		orders.registerOrderType(new OrderList(), OrderType.UnitCreation);
-		orders.registerOrderType(new OrderList(), OrderType.Movement);
-		orders.registerOrderType(new OrderList(), OrderType.Update);
+		orders.registerOrderType(OrderType.UnitCreation);
+		orders.registerOrderType(OrderType.Movement);
+		orders.registerOrderType(OrderType.Update);
 
 		init();
 
@@ -88,7 +88,8 @@ public class Battle {
 			if (input.length != 2) {
 				paramError(Command.check);
 			} else {
-				pOrders.getGameDatabase().getUnit(Integer.parseInt(input[1]));
+				return pOrders.getGameDatabase().getUnit(
+						Integer.parseInt(input[1])) != null;
 			}
 			break;
 		default:
@@ -101,7 +102,8 @@ public class Battle {
 
 	private static void createUnit(OrderTimeMatrix pOrders, String pUnit,
 			String pX, String pY) {
-		log.info("creating unit with parameters: " + pUnit);
+		log.info(String.format("creating %s at position (%s, %s)", pUnit, pX,
+				pY));
 		Unit createdUnit;
 
 		if (pUnit.equals("marine") || pUnit.equals("m")) {

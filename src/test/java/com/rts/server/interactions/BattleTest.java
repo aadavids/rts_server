@@ -13,14 +13,57 @@ public class BattleTest extends TestCase {
 	public void testCreateUnit() throws Exception {
 		OrderTimeMatrix orders = new OrderTimeMatrix(4, new GameMap(),
 				new GameUnits());
-		orders.registerOrderType(new OrderList(), OrderType.UnitCreation);
+		orders.registerOrderType(OrderType.UnitCreation);
 		Battle.parseOrder(orders, "create marine 123 456");
 
 		assertEquals(1, (int) orders.queuePeek());
+
+		Battle.parseOrder(orders, "create marine 334 231");
+
+		assertEquals(2, (int) orders.queuePeek());
+	}
+
+	@Test
+	public void testInvalidCreateUnitParameters() throws Exception {
+		OrderTimeMatrix orders = new OrderTimeMatrix(4, new GameMap(),
+				new GameUnits());
+		orders.registerOrderType(OrderType.UnitCreation);
+		Battle.parseOrder(orders, "create marine 456");
+
+		assertEquals(0, (int) orders.queuePeek());
+	}
+
+	@Test
+	public void testCheckUnit() throws Exception {
+		OrderTimeMatrix orders = new OrderTimeMatrix(4, new GameMap(),
+				new GameUnits());
+		orders.registerOrderType(OrderType.UnitCreation);
+		Battle.parseOrder(orders, "create marine 123 456");
+
+		assertTrue(Battle.parseOrder(orders, "check 0"));
 	}
 
 	@Test
 	public void testInvalidCommand() throws Exception {
-
+		OrderTimeMatrix orders = new OrderTimeMatrix(4, new GameMap(),
+				new GameUnits());
+		orders.registerOrderType(OrderType.UnitCreation);
+		try {
+			Battle.parseOrder(orders, "tickle marine 123 456");
+			fail("Invalid command not caught");
+		} catch (Exception e) {
+			// Should catch exception here
+		}
 	}
+
+	@Test
+	public void testInvalidPosition() throws Exception {
+		OrderTimeMatrix orders = new OrderTimeMatrix(4, new GameMap(),
+				new GameUnits());
+		orders.registerOrderType(OrderType.UnitCreation);
+		Battle.parseOrder(orders, "create marine sdf geaf");
+
+		assertEquals(0, (int) orders.queuePeek());
+	}
+
 }

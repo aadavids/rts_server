@@ -55,10 +55,9 @@ public class OrderTimeMatrix {
 		orderQueue.remove(pOrder);
 	}
 
-	public void registerOrderType(OrderList pNewOrderLists, OrderType pOrderType) {
+	public void registerOrderType(OrderType pOrderType) {
 		log.info("registering order list: " + pOrderType.toString());
-		pNewOrderLists.setOrderType(pOrderType);
-		orderLists.put(pOrderType, pNewOrderLists);
+		orderLists.put(pOrderType, new OrderList(pOrderType));
 	}
 
 	public GameUnits getGameDatabase() {
