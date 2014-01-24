@@ -34,26 +34,12 @@ public class BattleTest extends TestCase {
 	}
 
 	@Test
-	public void testCheckUnit() throws Exception {
-		OrderTimeMatrix orders = new OrderTimeMatrix(4, new GameMap(),
-				new GameUnits());
-		orders.registerOrderType(OrderType.UnitCreation);
-		Battle.parseOrder(orders, "create marine 123 456");
-
-		assertTrue(Battle.parseOrder(orders, "check 0"));
-	}
-
-	@Test
 	public void testInvalidCommand() throws Exception {
 		OrderTimeMatrix orders = new OrderTimeMatrix(4, new GameMap(),
 				new GameUnits());
 		orders.registerOrderType(OrderType.UnitCreation);
-		try {
-			Battle.parseOrder(orders, "tickle marine 123 456");
-			fail("Invalid command not caught");
-		} catch (Exception e) {
-			// Should catch exception here
-		}
+
+		assertFalse(Battle.parseOrder(orders, "tickle marine 123 456"));
 	}
 
 	@Test

@@ -63,11 +63,11 @@ public class OrderQueue {
 
 	public Order poll() {
 		log.info("Polling the queue");
-		OEWrapper order = inner.poll();
-		if (order == null) {
+		OEWrapper orderWrapper = inner.poll();
+		if (orderWrapper == null) {
 			return null;
 		}
-		return order.order;
+		return orderWrapper.order;
 	}
 
 }
