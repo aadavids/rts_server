@@ -19,13 +19,13 @@ public class Logger {
 		channelList = new ArrayList<OutputChannel>();
 	}
 
-	public boolean initialize(List<String> fileNames, List<String> comPorts) {
+	public boolean initialize(List<String> pFileNames, List<String> pComPorts) {
 		PrintWriter outputFile = null;
 		OutputStream serialchannel = null;
 
-		if (fileNames.size() == comPorts.size()) {
-			for (int i = 0; i < fileNames.size(); i++) {
-				String filename = fileNames.get(i) + ".txt";
+		if (pFileNames.size() == pComPorts.size()) {
+			for (int i = 0; i < pFileNames.size(); i++) {
+				String filename = pFileNames.get(i) + ".txt";
 				try {
 					outputFile = new PrintWriter(filename, "UTF-8");
 				} catch (Exception e) {
@@ -36,7 +36,7 @@ public class Logger {
 
 				try {
 					CommPortIdentifier portIdentifier = CommPortIdentifier
-							.getPortIdentifier(comPorts.get(i));
+							.getPortIdentifier(pComPorts.get(i));
 					if (portIdentifier.isCurrentlyOwned()) {
 						outputFile.close();
 						this.close();
@@ -56,7 +56,7 @@ public class Logger {
 					outputFile.close();
 					return false;
 				}
-				channelList.add(new OutputChannel(fileNames.get(i), outputFile,
+				channelList.add(new OutputChannel(pFileNames.get(i), outputFile,
 						serialchannel));
 			}
 			return true;
@@ -67,13 +67,13 @@ public class Logger {
 
 	public void close() {
 
-		for (int x = 0; x < channelList.size(); x++) {
+		for (OutputChannel output : channelList) {
 			try {
-				channelList.get(x).filechannel.close();
-				channelList.get(x).serialchannel.close();
+				output.filechannel.close();
+				output.serialchannel.close();
 			} catch (Exception e) {
-				log.error("Error at " + e.getStackTrace().toString()
-						+ " With Message: " + e.getMessage());
+				log.error("error at " + e.getStackTrace().toString()
+						+ " with message: " + e.getMessage());
 			}
 		}
 	}
