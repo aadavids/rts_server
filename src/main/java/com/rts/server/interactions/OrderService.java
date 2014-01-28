@@ -7,6 +7,10 @@ import java.util.concurrent.TimeUnit;
 
 import org.apache.log4j.Logger;
 
+/**
+ * A thread that runs and waits for orders to be popped from the order queue
+ * 
+ */
 public class OrderService implements Runnable {
 
 	private static final Logger log = Logger.getLogger(OrderService.class);
@@ -17,6 +21,13 @@ public class OrderService implements Runnable {
 	private final ScheduledExecutorService poll;
 	private final ExecutorService pool;
 
+	/**
+	 * 
+	 * @param pQueue
+	 *            the queue of orders that this service waits on
+	 * @param pPoolSize
+	 *            number of threads in the pool
+	 */
 	public OrderService(OrderQueue pQueue, int pPoolSize) {
 		queue = pQueue;
 		poll = Executors.newScheduledThreadPool(1);
