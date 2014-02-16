@@ -13,6 +13,11 @@ import com.rts.server.unit.Marine;
 import com.rts.server.unit.Unit;
 import com.rts.server.unit.management.GameUnits;
 
+/**
+ * 
+ * Used for command line level command entry
+ * 
+ */
 public class Battle {
 
 	private static final int EXECUTION_POOL_SIZE = 4;
