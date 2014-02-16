@@ -51,7 +51,6 @@ public class OrderQueue {
 	}
 
 	public boolean ready() {
-		// Battle.Log.logln("Engine","Checking Order Readiness");
 		OEWrapper order = inner.peek();
 		return order != null
 				&& order.executionTime <= System.currentTimeMillis();
