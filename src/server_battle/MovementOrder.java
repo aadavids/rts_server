@@ -50,5 +50,5 @@ public class MovementOrder extends Order {
 			//remainingMovement = pathme(moveGoal);
 			//run();
 		}
-		}
 	}
+}
