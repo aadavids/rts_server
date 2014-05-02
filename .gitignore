@@ -6,3 +6,8 @@ bin/
 *.class
 .metadata*
 eclimd.log
+.settings
+*.jar
+target/
+bin
+*.userprefs
