@@ -19,6 +19,7 @@ public class GameUnits {
 		log.info("creating unit: " + unit.uid);
 		unitLocation.addUnit(unit.uid, position);
 		unitList.put(unit.uid, unit);
+		unit.setPosition(position);
 		log.info("check: " + unitList.containsKey(unit.uid) + ", position: ("
 				+ position.toString() + ", " + position.y + ")");
 	}

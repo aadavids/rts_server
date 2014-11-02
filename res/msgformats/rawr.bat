@@ -1,0 +1,1 @@
+protoc --proto_path=res/msgformats --java_out=src/main/java res/msgformats/addressbook.proto

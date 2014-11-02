@@ -17,6 +17,8 @@ import com.rts.server.unit.Unit;
 import com.rts.server.unit.UnitCreator;
 import com.rts.server.unit.management.GameUnits;
 
+import com.rts.server.msgformats.AddressBookProtos.*;
+
 /**
  * 
  * Used for command line level command entry
@@ -52,6 +54,8 @@ public class Battle {
 		log.info("Let the game begin!");
 		BufferedReader buffReader = null;
 		String input;
+		
+		
 		do {
 			input = "";
 			try {
@@ -102,11 +106,14 @@ public class Battle {
 			moveUnit(pOrders, input[1], input[2], input[3]);
 			break;
 		case check:
+			com.rts.server.unit.Unit unit;
 			if (input.length != 2) {
 				paramError(Command.check);
-			} else {
-				return pOrders.getGameDatabase().getUnit(
-						Integer.parseInt(input[1])) != null;
+			} else if ((unit = pOrders.getGameDatabase().getUnit(
+					Integer.parseInt(input[1]))) != null) {
+				Point position = unit.getPosition();
+				log.info(String.format("unit %s at position (%s, %s)", unit,
+						position.x, position.y));
 			}
 			break;
 		}
@@ -122,10 +129,8 @@ public class Battle {
 		Unit unit = pOrders.getGameDatabase().getUnit(uid);
 
 		if (movementManager.canBeApplied(unit)) {
-			pOrders.addOrder(
-					new MovementOrder(uid, position, movementManager
-							.getMoveSpeed(pOrders.getGameDatabase()
-									.getUnit(uid))), OrderType.Movement);
+			pOrders.addOrder(new MovementOrder(uid, position),
+					OrderType.Movement);
 		}
 		log.info("Moved Unit: " + uid);
 	}

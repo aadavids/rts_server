@@ -20,6 +20,7 @@ public abstract class Unit implements Subscribable {
 
 	public Unit() {
 		uid = uidCounter.getAndIncrement();
+		position = new Point();
 		attributes = new ConcurrentHashMap<>();
 	}
 
